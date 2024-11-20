@@ -1,0 +1,80 @@
+[
+  {
+    "bookSourceComment": "作者：洛娅橙\n更新日志：\n20241120-优化链接信息，限制访问间隔为2秒，过快访问会520，重做登录效果，修复搜索\n20241106-增加购买功能\n20241104-修复掉登录bug\n20241103-优化登录体验，加快VIP章节加载速度\n20241101-优化精简发现页代码，增加获取章节信息\n20241030-修复单搜索结果情况，优化详情页作者获取，优化精简发现页代码\n20241013-修复封面图片获取，优化正文获取\n八叉发布页：https://8xsk.org\n{{@@dd@em@text##.##💎}}",
+    "bookSourceGroup": "🍊洛娅橙",
+    "bookSourceName": "🌈八叉书库",
+    "bookSourceType": 0,
+    "bookSourceUrl": "洛娅橙-八叉书库",
+    "bookUrlPattern": "https://www.\\d+\\.xyz/book/\\d+\\.html",
+    "concurrentRate": "2000",
+    "coverDecodeJs": "",
+    "customOrder": -52027,
+    "enabled": true,
+    "enabledCookieJar": false,
+    "enabledExplore": true,
+    "exploreUrl": "@js:\njava.put(\"banben\", '20241120');\nvar obj = {\n\t最近更新: {\n\t\t\"url\": \"/sort/0/{{page}}.html\",\n\t\t\"fbp\": 0.45},\n\t\t\n\t最近入库: {\n\t\t\"url\": \"/top/postdate/{{page}}.html\",\n\t\t\"fbp\": 0.45},\n\t\t\n\t最近完结: {\n\t\t\"url\": \"/modules/article/articlelist.php?fullflag=1&page={{page}}\",\n\t\t\"fbp\": 0.45},\n\t\t\n\t签约新书: {\n\t\t\"url\": \"/top/signtime/{{page}}.html\",\n\t\t\"fbp\": 0.45},\n\t\t\n\t字数榜: {\n\t\t\"url\": \"/top/words/{{page}}.html\",\n\t\t\"fbp\": 0.25},\n\t\t\n\t收藏榜: {\n\t\t\"url\": \"/top/goodnum/{{page}}.html\",\n\t\t\"fbp\": 0.25},\n\t\t\n\t新书榜: {\n\t\t\"url\": \"/top/newhot/{{page}}.html\",\n\t\t\"fbp\": 0.25},\n\t\t\n\t总点击: {\n\t\t\"url\": \"/top/allvisit/{{page}}.html\",\n\t\t\"fbp\": 0.25,\n\t\t\"wrap\": true},\n\t\t\n\t月点击: {\n\t\t\"url\": \"/top/monthvisit/{{page}}.html\",\n\t\t\"fbp\": 0.25},\n\t\t\n\t周点击: {\n\t\t\"url\": \"/top/weekvisit/{{page}}.html\",\n\t\t\"fbp\": 0.25},\n\t\t\n\t总推荐: {\n\t\t\"url\": \"/top/allvote/{{page}}.html\",\n\t\t\"fbp\": 0.25},\n\t\t\n\t月推荐: {\n\t\t\"url\": \"/top/monthvote/{{page}}.html\",\n\t\t\"fbp\": 0.25},\n\t\t\n\t周推荐: {\n\t\t\"url\": \"/top/weekvote/{{page}}.html\",\n\t\t\"fbp\": 0.25}\n\t}\n\nsurl = source.getVariable();\n\nvar sort = [];\npush = (title, url, size, wrap) => sort.push({\n    title: title,\n    url: url ? surl + url : \"\",\n    style: {\n      layout_flexGrow: 1,\n      layout_flexBasisPercent: size,\n      layout_wrapBefore: wrap ? wrap : false\n     }\n  });\n\nfor (x in obj) {\npush(x, obj[x].url, obj[x].fbp, obj[x].wrap);\n}\n\nlet banben = java.get(\"banben\");\nvar d=new Date();\npush(\"版本号：\"+banben, \"\", 1, true)\n//eval(String(source.loginCheckJs));\nJSON.stringify(sort);",
+    "header": "@js:\n(()=>{\n    var bs = \"com.mmbox.xbrowser\";\n    var xt = \"Windows\";\n    var ck=source.getLoginHeader();\n    var headers = {\n    \t\"User-Agent\": ua, \n    \t\"X-Requested-With\": bs,\n    \t\"Sec-Ch-Ua-Platform\": xt,\n    \t \"cookie\": ck\n    \t };\n    \t return JSON.stringify(headers);\n})();",
+    "jsLib": "ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0';",
+    "lastUpdateTime": 1732070940743,
+    "loginCheckJs": "n = String(source.getVariable());\nif (!n) {\n    s = java.ajax('https://8xsk.org/');\n    r = s.match(/href\\=\\\"([^\"]+)\\\"[^\"]+电脑端/)[1];\n    //r = 'https://www.8xsk.com/';\n    //r=\"https://www.733330.xyz\"\n    source.setVariable(r);\r\n    //java.toast(\"已重获网址\");\n}\n//java.log(\"🌈\"+result)\nresult",
+    "loginUi": "[\n    {\n        name: \"账号\",\n        type: \"text\"\n    },\n    {\n        name: \"密码\",\n        type: \"text\"\n    },\n    {\n        name: \" 注册\",\n        type: \"button\",\n        action: \"web()\"\n    },\n    {\n        name: \" 登录\",\n        type: \"button\",\n        action: \"login()\"\n    },\n    {\n        name: \" 退出\",\n        type: \"button\",\n        action: \"re()\"\n    },\n    {\n        name: \"  说明 \",\n        type: \"button\",\n        action: \"sm()\"\n    }\n]",
+    "loginUrl": "nn = String(source.getVariable());\n\r\nfunction shuchu(ll){\nlet cki = String(source.getLoginHeader()).includes(\"jieqiUserInfo\");\r\n    if (cki) {\r\n        java.toast(\"已成为VIP模式💎\");\r\n    }\r\n    else {\r\n        java.toast(\"已回到访客模式🔒\");\r\n    }\r\n}\n\r\nfunction login(){\r\n    var Info=source.getLoginInfoMap();\r\n    if (!nn) {\r\n        eval(String(source.loginCheckJs)); \r\n        nn = String(source.getVariable());\r\n    }\n    \r\n    let url = nn+'/login.php';\r\n    let un = String(Info['账号']);\r\n    let pw = String(Info['密码']);\r\n    let time = new Date().getTime();\n    \n    var body = `username=${un}&password=${pw}&submit=&act=login`;\n    \n    weiba = `?do=submit&jumpurl=${nn}`;\n    \r\n    let headers = {\r\n        'User-Agent': ua,\r\n        'referer': nn\r\n    };\n    cookie.removeCookie(nn);\n    \n    ck = java.post(url+ weiba,body,headers).cookies();\n\n    //处理cookie格式\n    cookie1 = Object.entries(ck)\n    .map(([key, value]) => `${key}=${value}`)\n    .join('; ');\n    \r\n    //ck=cookie.getCookie(nn);\n    //cookie.setCookie(nn,ck);\n    //加入↑该代码后，让软件重启后网址的cookie不消失\n    //放入登录头\r\n    source.putLoginHeader(cookie1);\r\n    shuchu(nn);\n    cookie.removeCookie(nn);\n    //仅使用登录头信息\n    \n//进行延时↓\n var t1=new Date();\n\ti1=t1.getSeconds();\n j1=t1.getMilliseconds();\n\tdo{\n\tlet t2=new Date();\n  i2=t2.getSeconds();\n  j2=t2.getMilliseconds();\n  if (i2>i1&&j2>=j1) {\n  \ti2=0}\n  } while (i2)\n//延时1秒，为了能看到结果输出\r\n}\r\n\r\nfunction web(){\r\n    let url = nn.replace('www.','') + '/register.php';\r\n    java.startBrowser(url, '八叉');\r\n}\r\n\r\nfunction re(){\r\n    cookie.removeCookie(nn);\n    //source.removeLoginHeader();\n    //清除登录头\r\n    shuchu(nn);\r\n}\n\r\nfunction sm(){\n    //let cki = java.getCookie(nn, 'jieqiUserInfo');\nlet cki = String(source.getLoginHeader()).includes(\"jieqiUserInfo\");\n    let ms= \"访客模式🔒\";\n    if (cki != '') {\r\n        ms = \"VIP模式💎\";\r\n    }\n    let banben = java.get(\"banben\");\r\n    let tt = `\\n网址：${nn}     \\n模式：${ms}                      \\n版本：${banben}                         \\n账号需要手动注册，无收费\\n网址会自动更新`;\n    java.longToast(tt);\r\n}",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "meta[name=\"keywords\"]@content##^^\\s*(.+)\\,\\s*(.+)\\s*$##$2",
+      "canReName": "",
+      "coverUrl": "class.divbox cf@img@src",
+      "init": "",
+      "intro": "&#10;{{@@class.tabcontent@class.tabvalue.1@td[0:3,9,10]@text}}\n{{r=java.getString('.tabcontent .tabvalue:eq(0) div@textNodes');\nif (r==\"\") {''}\nelse {'简介：\\n'+r.replace('　　','<br>')}\n}}",
+      "kind": "b:contains(标签：)~a@text##\\#",
+      "lastChapter": "",
+      "name": "meta[name=\"keywords\"]@content##^\\s*(.+)\\,\\s*(.+)\\s*$##$1",
+      "tocUrl": "class.btnlink b_hot mbs@href\n<js>\nvar ck=source.getLoginHeader()||'';\nresult+`,{\n\"headers\":{\n    \t \"cookie\": '${ck}'\n    \t }\n}`\n</js>",
+      "wordCount": ".tabcontent .tabvalue.1@html##全文字数：(\\d+)##$1###"
+    },
+    "ruleContent": {
+      "content": "#content,#acontent@html",
+      "payAction": "nn = String(source.getVariable());\nvar url = nn+'/modules/obook/buychapter.php';\nck = source.getLoginHeader();\nvar tk = String(ck).match(/UserToken%3D([^%]+)/)[1];\nvar cid = String(chapter.url).match(/cid\\=(\\d+)/)[1];\nvar body = `buytype=0&act=buy&jieqi_token=${tk}&cid=${cid}&submit=`;\nlet headers = {\r\n        'user-agent': ua,\r\n        'referer': nn,\n        'cookie': ck\r\n    };\r\n    let option = {\r\n        \"method\": \"POST\",\r\n        \"headers\": headers,\r\n        \"body\": body\r\n    };\nlet cki = java.getCookie(nn, 'jieqiUserInfo');\nif (cki) {\n\tjava.ajax(url +','+ JSON.stringify(option));\n\ttrue\n\t}\nelse {\n\tjava.longToast(\"💎请点击右上角登录账号\");\n\tfalse\n\t}",
+      "replaceRegex": "##.*8xsk\\..*|.*跳转手机端阅读。|.*手机请访问：.*",
+      "sourceRegex": "",
+      "title": "class.mt mb@a@href\n<js>\nif (result)\njava.toast(\"💎请点击右上角登录账号\");\n\"\"\n</js>"
+    },
+    "ruleExplore": {
+      "author": "td.2@text||span:contains(作者：)+span@text",
+      "bookList": "#jieqi_page_contents>tr||#content div[class=\"c_row cf\"]",
+      "bookUrl": "td.0@a.-1@href||class.c_subject@a.1@href",
+      "coverUrl": "td.0@a.-1@href||img@src##book\\/(\\d+)\\.html|(htt.*\\.jpg)##$1$2###\n<js>\nif (/articlelist|sort/.test(baseUrl)) {result}\nelse{\n  if (result<1000) {n=0}\n  else {n=result.slice(0,-3);}\n  '/files/article/image/'+n+'/'+result+'/'+result+'s.jpg';\n}\n</js>",
+      "intro": "td.3@text||class.c_description@text\n<js>\nif (baseUrl.includes(\"top/words\")) {'⠀\\n字数：'+(result/10000).toFixed(2)+'万'}\nelse if (baseUrl.includes(\"top/goodnum\")) {'⠀\\n收藏数：'+result}\nelse if (baseUrl.includes(\"top/newhot\")) {'⠀\\n点击数：'+result}\nelse if (baseUrl.includes(\"top/signtime\")) {\n  var t = parseInt(result)*1000;\n  var date = new Date(t);\n  y = date.getFullYear()%2000;\n  m = date.getMonth() + 1;\n  d = date.getDate();\n  h = date.getHours().toString().padStart(2, '0');\n  min = date.getMinutes().toString().padStart(2, '0');\n  s = date.getSeconds();\n  //tt = date.toLocaleTimeString();\n  '⠀\\n签约时间：'+y+'年'+m+'月'+d+'日'+h+':'+min+' '+s+'秒'\n}\nelse if (baseUrl.includes(\"top/lastupdate\")) {'⠀\\n字数：'+(result/10000).toFixed(2)+'万'}\nelse if (baseUrl.includes(\"top/postdate\")) {'⠀\\n入库时间：'+result}\nelse if (baseUrl.includes(\"top/allvisit\")) {'⠀\\n总点击：'+result}\nelse if (baseUrl.includes(\"top/monthvisit\")) {'⠀\\n月点击：'+result}\nelse if (baseUrl.includes(\"top/weekvisit\")) {'⠀\\n周点击：'+result}\nelse if (baseUrl.includes(\"top/allvote\")) {'⠀\\n总推荐：'+result}\nelse if (baseUrl.includes(\"top/monthvote\")) {'⠀\\n月推荐：'+result}\nelse if (baseUrl.includes(\"top/weekvote\")) {'⠀\\n周推荐：'+result}\nelse if (/articlelist|sort/.test(baseUrl)) {result}\nelse {''}\n</js>",
+      "kind": "td[4,5]@text||span:contains(更新：)+span@text",
+      "lastChapter": "td.1@a.-1@text||class.c_subject@a.-1@text",
+      "name": "td.0@a.-1@text||class.c_subject@a.1@text",
+      "wordCount": "<js>\nif (/articlelist|sort/.test(baseUrl)) {\n  java.getString('span:contains(字数：)+span@text')\n}\n</js>"
+    },
+    "ruleSearch": {
+      "author": "span:contains(作者：)+span@text",
+      "bookList": "#jieqi_page_contents>div\n<js>\nif (!String(result)) {\n//source.setVariable('');\n//java.toast(\"需重获网址\");\n}\nresult\n</js>",
+      "bookUrl": "class.c_subject@a.0@href\n<js>\nvar ck=source.getLoginHeader()||'';\nresult+`,{\n\"headers\":{\n    \t \"cookie\": '${ck}'\n    \t }\n}`\n</js>",
+      "checkKeyWord": "三年又三年",
+      "coverUrl": ".fl img@src",
+      "intro": ".c_description@text",
+      "kind": "span:contains(更新：)+span@text&&span:contains(关键字：)+span@text\n<js>\nString(result).replace(/[\\[\\]\\#\\,]/g,'').split(' ');\n</js>",
+      "lastChapter": "span:contains(最新章节：)+span@text",
+      "name": ".c_subject@text##\\\"",
+      "wordCount": "span:contains(字数：)+span@text"
+    },
+    "ruleToc": {
+      "chapterList": ".index dd,dt\n<js>\nif (!String(result)) {\nsource.setVariable('');\n//java.toast(\"需刷新\");\n}\nresult\n</js>",
+      "chapterName": "text",
+      "chapterUrl": "a@href\n<js>\nvar ck=source.getLoginHeader()||'';\n    //使用登录头中的信息\nresult+`,{\n\"headers\":{\n    \t \"cookie\": '${ck}'\n    \t }\n}`\n</js>",
+      "formatJs": "",
+      "isPay": "",
+      "isVip": "dd@em@text",
+      "isVolume": "dt@text",
+      "preUpdateJs": "",
+      "updateTime": "{{@@dd@a@title##\\d{1,2}\\:\\d{1,2}更新，共(\\d+字).*## $1}}"
+    },
+    "searchUrl": "<js>\neval(String(source.loginCheckJs));\nnn = source.getVariable();\nck=source.getLoginHeader()||'';\n//使用登录头中的信息\nbody=`searchtype=all&searchkey=${key}&act=search&submit=`;\nnn + `/modules/article/search.php,{\n\t  \"method\": 'POST',\n\t  \"body\": '${body}',\n\t  \"headers\":{\n    \t \"cookie\": '${ck}'\n    \t }\n}`\n</js>",
+    "variableComment": "♦当前书源使用的八叉网址\n♦会自动从网址发布页获取",
+    "weight": 0
+  }
+]
