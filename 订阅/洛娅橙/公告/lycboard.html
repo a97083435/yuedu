@@ -1,0 +1,67 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>导入</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        textarea {
+            font-size: 12px;
+            width: 96%;
+            margin: 60px 2%;
+            padding: 8px;
+        }
+
+        button {
+            background-color: rgb(76, 175, 80);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            height: 50px;
+            width: 100px;
+            overflow: hidden;
+            transition: font-size 0.2s;
+            font-size: 16px;
+        }
+
+        .an-s {
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="copyt" rows="6" placeholder="在这里填写链接
+支持书源、订阅源、净化规则、字典规则等json文件链接
+支持书籍网址导入(需要有对应的书源)"></textarea>
+    <br>
+    <button id="btn1" onclick="copy()">导入</button>
+    <script>
+        function copy() {
+            const btn = document.getElementById('btn1');
+            btn.classList.add('an-s');
+            const cpt = document.getElementById("copyt");
+            let url = cpt.value;
+            url = url.replace(/\n|\r|^[^a-z]+|\s+$/gi, '');
+            setTimeout(() => {
+                btn.classList.remove('an-s');
+            }, 500);
+            if (url == '') alert('请输入内容');
+            else if (/^https?:/.test(url)) {
+                if (/json$/.test(url)) {
+                    window.location.href = 'legado://import/importonline?src=' + url;
+                }
+                else {
+                    window.location.href = 'legado://import/addToBookshelf?src=' + url;
+                }
+            }
+            else alert('链接格式错误');
+        }
+    </script>
+</body>
+</html>
