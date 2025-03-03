@@ -1,0 +1,13 @@
+    try {
+        tm[i] = java.timeFormat(new Date(tm[i]).getTime());
+    } catch (err) { tm[i] = ''; }
+    let xx = `<tr>
+<td>${nm[i]}</td>
+<td><i class="time">${tm[i]}</i></td>
+<td><a href="legado://import/Source?src=https://gitee.com${ur[i]}"><button><small>导入</small></button></a></td>
+${bylj[i]}
+<td><a href="https://gitee.com${ur[i].replace('/blob/', '/commits/')}"  style="color:#0000c0;">日志</a></td>
+</tr>`.replaceAll('/blob/', '/raw/');
+    re += xx;
+}
+
