@@ -24,7 +24,7 @@
   "sortUrl": "<js>\r\nlet banben=\"2.0.2\";\r\njava.toast('\\n欢迎🎉');\r\nlet url = 'https://gitee.com/lyc486/yuedu2/tree/main';\r\nlet rr = java.ajax(url);\r\nlet nm = com.jayway.jsonpath.JsonPath.read(rr, \"$..trees[*].name\");\r\nlet ur = com.jayway.jsonpath.JsonPath.read(rr, '$..trees[*].url');\r\nlet re = '';\r\nfor (let i = 0; i < nm.length; i++) {\r\n    re += nm[i] + '::https://gitee.com' + ur[i] + '\\n';\r\n}\r\nre+=\"其它::https://gitee.com/lyc486/yuedu2/tree/main/订阅/洛娅橙\";\r\nPackages.java.lang.Thread.sleep(100);\r\nre\r\n</js>",
   "sourceComment": "",
   "sourceGroup": "",
-  "sourceIcon": "https://gitee.com/lyc486/yuedu2/raw/main/订阅/洛娅橙/主页/Orange.svg",
+  "sourceIcon": "https://gitee.com/lyc486/yuedu2/raw/main/订阅/洛娅橙/主页/favicon.svg",
   "sourceName": "洛娅橙的订阅源",
   "sourceUrl": "https://github.com/luoyacheng",
   "style": "",
