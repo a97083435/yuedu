@@ -77,6 +77,21 @@
   {
     "excludeScope": "",
     "group": "修正",
+    "id": 1619421126360,
+    "isEnabled": true,
+    "isRegex": true,
+    "name": "🌈补充换行(下)",
+    "order": 215,
+    "pattern": "：[“「\"][^“「\"」”\\n]+[？！。…～][\"」”](?![\\n，。他她它说时])(?=[^\\n]{9})|\n{0}.*[“「][^“「\"」”\\n]+[？！。…～][”」][一-ꀀ]{1,6}[说道问]。.*",
+    "replacement": "@js:\nif (result.startsWith(\"：\")) {\nresult+=\"\\n\";\n}\nelse {\nresult=result.replace(/([”」].{1,6}[说道问]。)(?![\\n他她它“「])(?=[^\\n]{9})/,\"$1\\n\").replace(/[”」][“「]/,'”\\n“');\n}",
+    "scope": "",
+    "scopeContent": true,
+    "scopeTitle": false,
+    "timeoutMillisecond": 3000
+  },
+  {
+    "excludeScope": "",
+    "group": "修正",
     "id": 1708190124566,
     "isEnabled": true,
     "isRegex": true,
