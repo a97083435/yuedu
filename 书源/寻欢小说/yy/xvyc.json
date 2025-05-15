@@ -1,0 +1,50 @@
+[{
+  "bookSourceGroup": "🙈,寻欢",
+  "bookSourceName": "🌈寻欢小说",
+  "bookSourceType": 0,
+  "bookSourceUrl": "https://寻欢小说.luoyacheng.ip-ddns.com",
+  "customOrder": 1,
+  "enabled": false,
+  "enabledCookieJar": true,
+  "enabledExplore": true,
+  "exploreUrl": "@js:\nlet banben=\"0.0.1\";\nlet surl=((source.getLoginInfoMap()||{'网站地址':''})['网站地址']+''||'https://www.aahhss.com').match(/^http.{4}[^\\/]+/);\nlet webr=java.connect(surl).body();\nlet ee=gete('.children ul li a',webr);\nvar sort = [],\nph = (title, url, fg, wrap, fb) => sort.push({\n    \"title\": title,\n    \"url\": '{{'+url+'}}',\n    \"style\": {\n      layout_flexGrow: fg || 1,\n      layout_flexBasisPercent: fb || -1,\n      layout_wrapBefore: wrap ? true : false\n     }\n  });\n\nfor (let char of ee) {\nlet url=surl+char.attr('href');\nif (/category|tag/.test(url)) {\n\turl=`\"${url}\"+(page==1?'':'/'+(page-1))`;\n} else if (/top/.test(url)) {\n\turl=`\"${url}\"+(page==1?'index.html':'index_'+page+'.html')`;}\n\telse {url=`\"${url}\"`;}\nph(char.text(), url,1,0,url.includes('category')?0.25:0);\n}\n\nJSON.stringify(sort);",
+  "header": "@js:\n(()=>{\n    let u_a=java.getWebViewUA().replaceAll(\"; wv| Version\\/[345].0\",'')+'';\n    let headers = {\n    \t'User-Agent': u_a\n    \t };\n    \treturn JSON.stringify(headers);\n})();",
+  "jsLib": "function gets(x, r) {\nreturn r==undefined?\nthis.java.getString(x)+'':\nPackages.io.legado.app.model.analyzeRule.AnalyzeRule().getString(x,r)+'';}\nfunction gete(x, r) {\nreturn Packages.io.legado.app.model.analyzeRule.AnalyzeRule().setContent(r).getElement(x);}",
+  "lastUpdateTime": 1747330314276,
+  "loginUi": "[\n {\n\t\"name\": \"网站地址\",\n\t\"type\": \"text\"\n\t},\n {\n\t\"name\": \"💍测试\",\n\t\"type\": \"button\",\n\t\"action\": \"ces()\",\n\t\"style\": {\n\t\t\"layout_flexGrow\": 0,\n\t\t\"layout_flexBasisPercent\": -1}\n\t}\n]",
+  "loginUrl": "function login(){}\nfunction ces(){\n\trr=eval(java.importScript('bookSource.json')+'')[0];\njava.log('🍊'+\nJSON.stringify(rr,null,4)+'🍊');\nsource.ruleSearch.name=rr.ruleSearch.name;\nsource.ruleBookInfo.name=rr.ruleBookInfo.name;\njava.log('🍊'+rr+'🍊');\n\t}",
+  "respondTime": 180000,
+  "ruleBookInfo": {
+    "author": ".authors dd@text",
+    "coverUrl": ".cover img@src",
+    "init": "@js:\nresult",
+    "intro": ".book-desc@textNodes",
+    "kind": ".tag a@text",
+    "lastChapter": ".new dd@text",
+    "name": "h1@text",
+    "wordCount": ".wordcount dd@text"
+  },
+  "ruleContent": {
+    "content": "#content@p@text"
+  },
+  "ruleExplore": {
+    "author": "span@text",
+    "bookList": ".book-like>a",
+    "bookUrl": "a@href",
+    "coverUrl": "img@src",
+    "name": "h4@text"
+  },
+  "ruleSearch": {
+    "bookList": ".grid-item",
+    "bookUrl": "h3@a@href\n<js>\nlet surl=((source.getLoginInfoMap()||{'网站地址':''})['网站地址']+''||'https://www.aahhss.com').match(/^http.{4}[^\\/]+/);\nresult.replace(/^http.{4}[^\\/]+/,surl)\n</js>",
+    "coverUrl": "img@src##^http.+/file##https://static.aahhss.com/file",
+    "name": "h3@text"
+  },
+  "ruleToc": {
+    "chapterList": ".book-chapter@a",
+    "chapterName": "text",
+    "chapterUrl": "href"
+  },
+  "searchUrl": "https://www.aakkrr.com/search/{{key}}<,/{{page}}>",
+  "weight": 0
+}]
