@@ -1,0 +1,32 @@
+[{
+  "bookSourceGroup": "🙈,寻欢",
+  "bookSourceName": "🌈寻欢小说",
+  "bookSourceType": 0,
+  "bookSourceUrl": "https://寻欢小说2.luoyacheng.ip-ddns.com",
+  "customOrder": 2,
+  "enabled": true,
+  "enabledCookieJar": true,
+  "enabledExplore": true,
+  "exploreUrl": "@js:\nlet banben=\"0.0.1\";\neval(eval(java.importScript('bookSource.json')+'')[0].exploreUrl.replace('@js:',''));",
+  "header": "@js:\neval(eval(java.importScript('bookSource.json')+'')[0].header.replace('@js:',''));",
+  "jsLib": "function gets(x, r) {\nreturn r==undefined?\nthis.java.getString(x)+'':\nPackages.io.legado.app.model.analyzeRule.AnalyzeRule().getString(x,r)+'';}\nfunction gete(x, r) {\nreturn Packages.io.legado.app.model.analyzeRule.AnalyzeRule().setContent(r).getElement(x);}",
+  "lastUpdateTime": 1747329731357,
+  "loginUi": "[\n {\n\t\"name\": \"网站地址\",\n\t\"type\": \"text\"\n\t},\n {\n\t\"name\": \"💍测试\",\n\t\"type\": \"button\",\n\t\"action\": \"ces()\",\n\t\"style\": {\n\t\t\"layout_flexGrow\": 0,\n\t\t\"layout_flexBasisPercent\": -1}\n\t}\n]",
+  "loginUrl": "eval(eval(java.importScript('bookSource.json')+'')[0].loginUrl);",
+  "respondTime": 180000,
+  "ruleBookInfo": {
+    "init": "<js>\nvar l=eval(java.importScript('bookSource.json')+'')[0];\nfor (let char in l.ruleBookInfo) {\tsource.ruleBookInfo[char]=l.ruleBookInfo[char];}\nfor (let char in l.ruleToc) {\nsource.ruleToc[char]=l.ruleToc[char];}\neval(l.ruleBookInfo.init.replace('@js:',''));\n</js>"
+  },
+  "ruleContent": {
+    "content": "<js>\ngets(eval(java.importScript('bookSource.json')+'')[0].ruleContent.content);\n</js>"
+  },
+  "ruleExplore": {
+    "bookList": "<js>\nvar l=eval(java.importScript('bookSource.json')+'')[0].ruleExplore;\nfor (let char in l) {\nsource.ruleExplore[char]=l[char];}\njava.getElement(l.bookList);\n</js>"
+  },
+  "ruleSearch": {},
+  "ruleToc": {
+    "preUpdateJs": "var l=eval(java.importScript('bookSource.json')+'')[0].ruleToc;\nfor (let char in l) {\nsource.ruleToc[char]=l[char];}"
+  },
+  "searchUrl": "<js>\nvar l=eval(java.importScript('bookSource.json')+'')[0];\nfor (let char in l.ruleSearch) {\nsource.ruleSearch[char]=l.ruleSearch[char];}\nl.searchUrl;\n</js>",
+  "weight": 0
+}]
