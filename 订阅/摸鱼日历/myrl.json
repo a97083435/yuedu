@@ -1,0 +1,18 @@
+[{
+  "articleStyle": 0,
+  "customOrder": 0,
+  "enableJs": true,
+  "enabled": true,
+  "enabledCookieJar": false,
+  "header": "@js:\nlet days=Math.floor(Date.now()/(1000*60*60*24))+[];\nlet mydm=`\ntry {\nlet surls = source.getLoginInfoMap()||{'日历链接':'','天气链接':''};\nlet url=surls['日历链接']+[]||\"https://api.vvhan.com/api/moyu\";\nlet url2=surls['天气链接']+[]||\"https://api.vvhan.com/api/ipCard\";\nresult=html(url,url2);\n} catch (err) {java.longToast(''+err);}`;\ncache.putMemory('myrldm',mydm);\nif (cache.get('myrlop')!=days&&!cache.getFromMemory('myrlmr')) {\n\tcache.putMemory('myrlmr',true);\n\tcache.put('myrlop', days);\n\teval(cache.getFromMemory('myrldm')+'');\n\ttry {\n\tjava.startBrowserAwait(result,'摸鱼日历');}catch (e) {}\n\t}\nJSON.stringify({'User-Agent':java.getWebViewUA().replaceAll(\"; wv| Version\\/4.0\",'')});",
+  "jsLib": "function html(xx,yy) {\nlet lycht=String.raw`\n<html>\n<head>\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">\n<meta name=\"referrer\" content=\"no-referrer\">\n    <title>摸鱼日历</title>\n    <style>\n        body {\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            height: 100%;\n            min-height: 80vh;\n            margin: 0;\n        }\n        #tu1 {\n        \twidth: 100vw;\n        \tmargin: 0;}\n        \t#tu1>img {\n        \twidth: 100%;\n        \theight: auto;}\n        \t\n        #tu2 {\n        \twidth: 100vw;\n        \toverflow: hidden;\n        \tmargin: 0;}\n        #tu2>img {\n        \twidth: 100%;\n        \theight: 100%;\n        \tobject-fit: cover;\n        \tobject-position: center 100%;}\n    </style>\n</head>\n<body>\n<div id=\"tu1\">\n<img src=\"${xx}\" alt=\"日历未加载\">\n</div>\n<div id=\"tu2\">\n<img src=\"${yy}\" alt=\"天气未加载\">\n</div>\n<script>\ndocument.addEventListener('DOMContentLoaded', () => {\n  document.querySelectorAll('img').forEach(img => {\n    img.addEventListener('error', function() {\n      retryImageLoad(this,5);\n    });\n    // 存储原始地址\n    img.dataset.originalSrc = img.src;\n  });\n});\nfunction retryImageLoad(img, maxRetries = 3) {\n    let retryCount = parseInt(img.dataset.retryCount) || 0;\n    if (retryCount >= maxRetries) {\n      return;\n    }\n    img.dataset.retryCount = ++retryCount;\n    // 添加参数绕过缓存\n    const newSrc = img.dataset.originalSrc + \n                  '?retry=' + Date.now();\n    // 延迟重试\n    setTimeout(() => {\n      img.src = newSrc;\n      img.alt = img.alt+'，重试'+retryCount+'次';\n    }, 3**retryCount*30);\n  }\n</script>\n</body>\n</html>`;\nreturn `data:text/html;base64,${this.java.base64Encode(lycht)}`;\n}",
+  "lastUpdateTime": 0,
+  "loadWithBaseUrl": false,
+  "loginUi": "[\n    {\n        name: \"日历链接\",\n        type: \"text\"\n    },\n    {\n        name: \"天气链接\",\n        type: \"text\"\n    }\n]",
+  "loginUrl": "function login(){}",
+  "singleUrl": true,
+  "sourceComment": "let banben=\"0.0.3\";\n//韩小韩接口api.vvhan.com",
+  "sourceIcon": "http://127.0.0.1",
+  "sourceName": "摸鱼日历",
+  "sourceUrl": "http@js:eval(cache.getFromMemory('myrldm')+'')"
+}]
