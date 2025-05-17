@@ -3,7 +3,7 @@ name: 自动关闭过期议题
 on:
   workflow_dispatch:         # 允许手动触发
   schedule:
-    - cron: '0 23 * * 5' # 每周五23点运行一次
+    - cron: '0 15 * * 5' # 每周五23点运行一次
 
 jobs:
   close_stale_issues:
