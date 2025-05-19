@@ -1,5 +1,6 @@
 name: 规则反馈
 description: 净化、目录、字典等规则反馈，不一定能解决
+title: "标题-请简要描述"
 labels: ["rule"]
 body:
   - type: dropdown
