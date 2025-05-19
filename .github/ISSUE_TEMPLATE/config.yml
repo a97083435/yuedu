@@ -3,23 +3,9 @@ contact_links:
   - name: 源反馈
     url: https://github.com/Luoyacheng/yuedu/discussions
     about: 问题反馈请带上软件版本号、源版本号
-    order: 1
   - name: 寻求帮助
     url: https://github.com/Luoyacheng/yuedu/discussions/new?category=%E9%97%AE%E7%AD%94
     about: 虽然不一定会解答就是了
-    order: 2
   - name: 个人阅读网站
     url: https://loyc.xyz
     about: 里面会有一些源使用教程
-    order: 3
-issue_templates:
-  - name: 规则反馈
-    id: 规则反馈
-    labels: [rule]
-    description: 提交 Bug
-    order: 4
-  - name: 新功能建议
-    id: feature_request
-    labels: [enhancement]
-    description: 提交新功能建议
-    order: 5
