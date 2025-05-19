@@ -4,7 +4,7 @@ labels: ["rule"]
 body:
   - type: dropdown
     attributes:
-      label: ❗规则类型
+      label: 规则类型
       description: 请选择你要提交的规则类别
       options:
         - 净化规则
@@ -15,9 +15,9 @@ body:
   - type: textarea
     attributes:
       label: 问题描述
+      placeholder: 请正确的选择上方的规则类型
     validations:
       required: true
-      placeholder: 或者填功能请求？
   - type: textarea
     attributes:
       label: 图片或视频
@@ -29,7 +29,7 @@ body:
       label: 规则代码
       description: |
         可选
-      placeholder: 辅助情况了解
+      placeholder: 某条规则的代码
   - type: textarea
     attributes:
       label: 文章原文
