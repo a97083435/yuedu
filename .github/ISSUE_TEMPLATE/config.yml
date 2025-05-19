@@ -9,3 +9,14 @@ contact_links:
   - name: 个人阅读网站
     url: https://loyc.xyz
     about: 里面会有一些源使用教程
+issue_templates:
+  - name: 规则反馈
+    id: bug_report
+    labels: [bug]
+    description: 提交 Bug
+    order: 1
+  - name: 新功能建议
+    id: feature_request
+    labels: [enhancement]
+    description: 提交新功能建议
+    order: 2
