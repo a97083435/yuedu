@@ -3,6 +3,12 @@ description: 净化、目录、字典等规则反馈，不一定能解决
 title: "请在这里填写标题"
 labels: ["rule"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 填写说明
+        **标题要求**：
+        请将标题格式化为 `[Bug] 问题概述` 或 `[Feature] 功能请求`。
   - type: dropdown
     attributes:
       label: 规则类型
