@@ -11,8 +11,8 @@ contact_links:
     about: 里面会有一些源使用教程
 issue_templates:
   - name: 规则反馈
-    id: bug_report
-    labels: [bug]
+    id: 规则反馈
+    labels: [rule]
     description: 提交 Bug
     order: 1
   - name: 新功能建议
