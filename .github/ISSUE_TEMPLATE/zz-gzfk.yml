@@ -1,4 +1,4 @@
-name: 规则反馈 / BUG Report
+name: 规则反馈
 description: 净化、目录、字典等规则反馈，不一定能解决
 labels: ["rule"]
 body:
