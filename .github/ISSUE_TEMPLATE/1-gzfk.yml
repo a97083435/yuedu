@@ -4,12 +4,12 @@ labels: ["rule"]
 body:
   - type: dropdown
     attributes:
-      label: 请选择规则类型
+      label: ❗规则类型
       description: 请选择你要提交的规则类别
       options:
-        - 字典规则
         - 净化规则
         - 目录规则
+        - 字典规则
     validations:
       required: true
   - type: textarea
@@ -17,17 +17,25 @@ body:
       label: 问题描述
     validations:
       required: true
+      placeholder: 或者填功能请求？
   - type: textarea
     attributes:
       label: 图片或视频
+      placeholder: 注意最大上传文件为10m
     validations:
       required: true
+  - type: textarea
+    attributes:
+      label: 规则代码
+      description: |
+        可选
+      placeholder: 辅助情况了解
   - type: textarea
     attributes:
       label: 文章原文
       description: |
         可选
-      placeholder: 净化规则反馈，请先关净化再复制
+      placeholder: 反馈净化规则时，请先关净化再复制
   - type: input
     attributes:
       label: 阅读版本 / Legado version
