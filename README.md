@@ -1,5 +1,5 @@
 <div align="center">
-<img width="125" height="125" src="https://github.com/Luoyacheng/yuedu/blob/main/订阅/洛娅橙/主页/favicon.svg" alt="luoyacheng"/>
+<img width="125" height="125" src="/订阅/洛娅橙/主页/favicon.svg" alt="luoyacheng"/>
 
 洛娅橙的阅读仓库
 <br>
