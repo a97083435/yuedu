@@ -24,8 +24,9 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: 图片或视频
-      placeholder: 注意最大上传文件为10m
+      label: 附件-图片或视频
+      description: 注意最大上传文件为10m
+      placeholder: 隐私问题自行注意
     validations:
       required: true
   - type: textarea
@@ -37,8 +38,7 @@ body:
   - type: textarea
     attributes:
       label: 文章原文
-      description: |
-        可选
+      description: 可选
       placeholder: 反馈净化规则时，请先关净化再复制
   - type: input
     attributes:
