@@ -9,5 +9,5 @@
 
 |订阅源名称|github链接|gitee链接|
 |---|---|---|
-|源仓库|[一键导入](legado://import/importonline?src=https://github.com/luoyacheng/yuedu/raw/main/订阅/源仓库/yck.json)|[一键导入](legado://import/importonline?src=https://gitee.com/lyc486/yuedu2/raw/main/订阅/源仓库/yck.json)|
+|源仓库|[一键导入](https://github.com/luoyacheng/yuedu/raw/main/订阅/源仓库/yck.json)|[一键导入](legado://import/importonline?src=https://gitee.com/lyc486/yuedu2/raw/main/%E8%AE%A2%E9%98%85/%E6%BA%90%E4%BB%93%E5%BA%93/yck.json)|
 |洛娅橙|xx|yy|
