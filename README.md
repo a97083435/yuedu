@@ -26,3 +26,12 @@
 ## Stargazers over time
 [![Stargazers over time](https://starchart.cc/Luoyacheng/yuedu.svg?variant=adaptive)](https://starchart.cc/Luoyacheng/yuedu)
 
+## Star History
+
+<a href="https://www.star-history.com/#luoyacheng/yuedu&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=luoyacheng/yuedu&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=luoyacheng/yuedu&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=luoyacheng/yuedu&type=Date" />
+ </picture>
+</a>
