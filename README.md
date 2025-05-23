@@ -23,9 +23,6 @@
 |绅士漫画|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://github.com/luoyacheng/yuedu/raw/main/漫画/绅士漫画/shenshi.json)|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://gitee.com/lyc486/yuedu2/raw/main/漫画/绅士漫画/shenshi.json)|
 |读漫屋|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://github.com/luoyacheng/yuedu/raw/main/漫画/读漫屋/duman.json)|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://gitee.com/lyc486/yuedu2/raw/main/漫画/读漫屋/duman.json)|
 
-## Stargazers over time
-[![Stargazers over time](https://starchart.cc/Luoyacheng/yuedu.svg?variant=adaptive)](https://starchart.cc/Luoyacheng/yuedu)
-
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=luoyacheng/yuedu&type=Date)](https://www.star-history.com/#luoyacheng/yuedu&Date)
+<img alt="Star History Chart" src="https://api.star-history.com/svg?repos=luoyacheng/yuedu&type=Date" />
