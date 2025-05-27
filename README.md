@@ -4,7 +4,7 @@
 洛娅橙的阅读仓库
 <br>
 <a href="https://github.com/Luoyacheng" target="_blank">luoyacheng</a> / <a href="https://loyc.xyz" target="_blank">loyc.xyz</a>  
-针对阅读3.0 制作的源和规则
+针对[阅读3.0](https://github.com/gedoor/legado)制作的源和规则
 </div>
 
 ## 部分资源展示
