@@ -3,7 +3,7 @@ name: Merge 净化 JSON
 on:
   push:
     paths:
-      - '净化/**'
+      - '净化/**/*.json'
       - '!净化/合集/jh.json'
 
 jobs:
@@ -17,15 +17,12 @@ jobs:
       - name: Merge all JSON files
         run: |
           mkdir -p 净化/合集
-          files=$(find 净化 -maxdepth 1 -type f -name '*.json' ! -name 'jh.json')
-          echo "[" > 净化/合集/jh.json
-          first=1
-          for file in $files; do
-            if [ $first -eq 0 ]; then echo "," >> 净化/合集/jh.json; fi
-            cat "$file" >> 净化/合集/jh.json
-            first=0
-          done
-          echo "]" >> 净化/合集/jh.json
+          files=$(find 净化 -type f -name '*.json' ! -path '净化/合集/jh.json')
+          if [ -z "$files" ]; then
+            echo "[]" > 净化/合集/jh.json
+          else
+            jq -s 'add' $files > 净化/合集/jh.json
+          fi
 
       - name: Check if jh.json changed
         id: diff
@@ -43,5 +40,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "自动合并净化下所有json文件为合集/jh.json" 净化/合集/jh.json
+          git commit -m "自动提交合集" 净化/合集/jh.json
           git push
