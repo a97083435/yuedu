@@ -21,7 +21,7 @@ jobs:
       - name: Merge JSON files
         run: |
           mkdir -p "净化/合集"
-          json_files=$(find 净化 -maxdepth 1 -type f -name '*.json' ! -name 'jh.json')
+          json_files=$(find 净化 -type f -name '*.json' ! -name 'jh.json')
           if [ -n "$json_files" ]; then
             jq -s 'add' $json_files > "净化/合集/jh.json"
           else
