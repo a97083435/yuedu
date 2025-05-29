@@ -1,10 +1,11 @@
-name: Merge 净化 JSON
+name: Merge JSONs in /净化
 
 on:
   push:
     paths:
-      - '净化/**/*.json'
-      - '!净化/合集/jh.json'
+      - '净化/*.json'
+      - '!净化/合集/jh.json'  # 排除 jh.json 的变化触发
+  workflow_dispatch:
 
 jobs:
   merge-json:
@@ -13,35 +14,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Merge all JSON files
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Merge JSON files
         run: |
           mkdir -p 净化/合集
-          files=$(find 净化 -type f -name '*.json' ! -path '净化/合集/jh.json')
-          if [ -z "$files" ]; then
-            echo "[]" > 净化/合集/jh.json
-          else
-            jq -s 'add' $files > 净化/合集/jh.json
-          fi
+          jq -s 'add' $(find 净化 -maxdepth 1 -type f -name '*.json' ! -name 'jh.json') > 净化/合集/jh.json
 
-      - name: Check if jh.json changed
-        id: diff
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git add 净化/合集/jh.json
-          if git diff --cached --quiet; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-          else
-            echo "changed=true" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Commit and push if changed
-        if: steps.diff.outputs.changed == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "自动提交合集" 净化/合集/jh.json
-          git push
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: '自动合并净化目录下JSON文件为jh.json'
+          file_pattern: '净化/合集/jh.json'
