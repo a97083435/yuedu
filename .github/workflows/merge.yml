@@ -3,8 +3,8 @@ name: Merge 净化 JSON
 on:
   push:
     paths:
-      - 'yuedu/净化/**'
-      - '!yuedu/净化/合集/jh.json'
+      - '净化/**'
+      - '!净化/合集/jh.json'
 
 jobs:
   merge-json:
@@ -16,22 +16,22 @@ jobs:
 
       - name: Merge all JSON files
         run: |
-          mkdir -p yuedu/净化/合集
-          files=$(find yuedu/净化 -maxdepth 1 -type f -name '*.json' ! -name 'jh.json')
-          echo "[" > yuedu/净化/合集/jh.json
+          mkdir -p 净化/合集
+          files=$(find 净化 -maxdepth 1 -type f -name '*.json' ! -name 'jh.json')
+          echo "[" > 净化/合集/jh.json
           first=1
           for file in $files; do
-            if [ $first -eq 0 ]; then echo "," >> yuedu/净化/合集/jh.json; fi
-            cat "$file" >> yuedu/净化/合集/jh.json
+            if [ $first -eq 0 ]; then echo "," >> 净化/合集/jh.json; fi
+            cat "$file" >> 净化/合集/jh.json
             first=0
           done
-          echo "]" >> yuedu/净化/合集/jh.json
+          echo "]" >> 净化/合集/jh.json
 
       - name: Check if jh.json changed
         id: diff
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git add yuedu/净化/合集/jh.json
+          git add 净化/合集/jh.json
           if git diff --cached --quiet; then
             echo "changed=false" >> $GITHUB_OUTPUT
           else
@@ -43,5 +43,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "自动合并净化下所有json文件为合集/jh.json" yuedu/净化/合集/jh.json
+          git commit -m "自动合并净化下所有json文件为合集/jh.json" 净化/合集/jh.json
           git push
