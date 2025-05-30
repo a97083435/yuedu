@@ -1,37 +1,57 @@
-name: Merge 净化下 JSON 文件
+name: Merge JSONs in /净化
 
 on:
   push:
     paths:
-      - '净化/*.json'
+      - '净化/**/*.json'
       - '!净化/合集/jh.json'
-  workflow_dispatch:
 
 jobs:
-  merge-json:
+  merge_json:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up jq
-        run: sudo apt-get update && sudo apt-get install -y jq
-
-      - name: Merge JSON files
-        run: |
-          mkdir -p "净化/合集"
-          json_files=$(find 净化 -type f -name '*.json' ! -name 'jh.json')
-          if [ -n "$json_files" ]; then
-            jq -s 'add' $json_files > "净化/合集/jh.json"
-          else
-            echo "[]" > "净化/合集/jh.json"
-          fi
-
-      - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          commit_message: '自动合并净化目录下JSON文件为jh.json'
-          file_pattern: '净化/合集/jh.json'
-          commit_user_name: 'github-actions[bot]'
-          commit_user_email: '41898282+github-actions[bot]@users.noreply.github.com'
+          node-version: '20'
+
+      - name: Merge JSON files to one big array
+        run: |
+          mkdir -p 净化/合集
+          # 查找所有json文件，排除jh.json，然后合并为一个大数组
+          files=$(find 净化 -type f -name '*.json' ! -path '净化/合集/jh.json')
+          echo "[" > 净化/合集/jh.json
+          first_file=1
+          for file in $files; do
+            # 跳过空文件
+            if [ ! -s "$file" ]; then
+              continue
+            fi
+            # 去掉首尾[ ]，避免嵌套
+            content=$(cat "$file" | sed -e '1d' -e '$d')
+            # 跳过空内容
+            if [ -z "$content" ]; then
+              continue
+            fi
+            if [ $first_file -eq 1 ]; then
+              echo "$content" >> 净化/合集/jh.json
+              first_file=0
+            else
+              echo "," >> 净化/合集/jh.json
+              echo "$content" >> 净化/合集/jh.json
+            fi
+          done
+          echo "]" >> 净化/合集/jh.json
+
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if ! git diff --quiet 净化/合集/jh.json; then
+            git add 净化/合集/jh.json
+            git commit -m '自动合并净化目录下所有json文件到合集/jh.json'
+            git push
+          fi
