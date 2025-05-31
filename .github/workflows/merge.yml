@@ -31,7 +31,7 @@ jobs:
               continue
             fi
             # 去掉首尾[ ]，避免嵌套，正则
-            content=$(cat "$file" | sed -e 's/^[[:space:]]*\[//' -e 's/\][[:space:]]*$//')
+            content=$(cat "$file" | sed -e '1d' -e '$d')
             # 跳过空内容
             if [ -z "$content" ]; then
               continue
