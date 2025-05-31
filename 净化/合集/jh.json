@@ -45,6 +45,7 @@
     "timeoutMillisecond": 3000
   }
 ,
+{
   "excludeScope": "",
   "group": "拼音",
   "id": 1733284669859,
@@ -58,6 +59,7 @@
   "scopeContent": true,
   "scopeTitle": false,
   "timeoutMillisecond": 3000
+}
 ,
   {
     "excludeScope": "",
