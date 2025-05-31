@@ -30,7 +30,7 @@ jobs:
             if [ ! -s "$file" ]; then
               continue
             fi
-            # 去掉首尾[ ]，避免嵌套，正则
+            # 去掉首尾[ ]，避免嵌套
             content=$(cat "$file" | sed -e '1d' -e '$d')
             # 跳过空内容
             if [ -z "$content" ]; then
