@@ -1,5 +1,4 @@
 [
-
   {
     "excludeScope": "",
     "group": "标题",
@@ -62,7 +61,6 @@
   "timeoutMillisecond": 3000
 }
 ,
-
   {
     "excludeScope": "",
     "group": "修正",
