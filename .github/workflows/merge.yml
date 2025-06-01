@@ -39,6 +39,6 @@ jobs:
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
           if ! git diff --quiet 净化/合集/jh.json; then
             git add 净化/合集/jh.json
-            git commit -m '机器人自动合并净化规则'
+            git commit -m '自动合并净化目录下所有json文件到合集/jh.json'
             git push
           fi
