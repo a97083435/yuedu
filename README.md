@@ -31,8 +31,8 @@
 
 |正则规则|github链接|备用链接|
 |:--|:-:|:-:|
-|净化规则|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://github.com/luoyacheng/yuedu/raw/main/净化/合集/jh.json)|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://github.moeyy.xyz/https://github.com/Luoyacheng/yuedu/blob/main/净化/合集/jh.json)|
-|目录规则|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://github.com/luoyacheng/yuedu/raw/main/目录/合集/mlhj.json)|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://github.moeyy.xyz/https://github.com/Luoyacheng/yuedu/blob/main/目录/合集/mlhj.json)|
+|替换净化|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://github.com/luoyacheng/yuedu/raw/main/净化/合集/jh.json)|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://github.moeyy.xyz/https://github.com/Luoyacheng/yuedu/blob/main/净化/合集/jh.json)|
+|TXT目录|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://github.com/luoyacheng/yuedu/raw/main/目录/合集/mlhj.json)|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://github.moeyy.xyz/https://github.com/Luoyacheng/yuedu/blob/main/目录/合集/mlhj.json)|
 
 ## Star History
 
