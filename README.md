@@ -1,9 +1,9 @@
 <div align="center">
-<img width="125" height="125" src="/订阅/洛娅橙/主页/favicon.svg" alt="luoyacheng"/>
+<img width="125" height="125" src="/订阅/洛娅橙/主页/favicon.svg" alt="洛娅橙"/>
 
 洛娅橙的阅读仓库
 <br>
-<a href="https://loyc.xyz" target="_blank">loyc.xyz</a> / <a href="https://github.com/Luoyacheng" target="_blank">luoyacheng</a>  
+<a href="https://loyc.xyz" target="_blank">loyc.xyz</a>  /  <a href="https://github.com/Luoyacheng" target="_blank">luoyacheng</a>  
 针对[阅读3.0](https://github.com/gedoor/legado)制作的源和规则
 </div>
 
