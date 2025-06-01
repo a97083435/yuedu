@@ -35,7 +35,7 @@
 |TXT目录|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://github.com/luoyacheng/yuedu/raw/main/目录/合集/mlhj.json)|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://github.moeyy.xyz/https://github.com/Luoyacheng/yuedu/blob/main/目录/合集/mlhj.json)|
 
 <details>
-<summary><h3>Star History</h3></summary>
+<summary><h4> Star History</h4></summary>
 
 <picture>
    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=luoyacheng/yuedu&type=Date&theme=dark" />
