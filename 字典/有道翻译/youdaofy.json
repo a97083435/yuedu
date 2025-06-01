@@ -1,4 +1,5 @@
-[{
+[
+{
   "enabled": true,
   "name": "有道",
   "showRule": "@js:\nlet j = org.jsoup.Jsoup.parse(result);\nlet yw = String(j.select('#inputText').text());\nlet fy = j.select('#translateResult').text();\nresult = '原文：<br>'+yw+'<br>翻译：<br>'+fy;",
