@@ -26,7 +26,7 @@ jobs:
       - name: Merge JSON files to one big array
         run: |
           mkdir -p 字典/合集
-          files=$(find 目录 -type f -name '*.json' ! -path '字典/合集/zdhj.json')
+          files=$(find 字典 -type f -name '*.json' ! -path '字典/合集/zdhj.json')
           if [ -z "$files" ]; then
             echo "[]" > 字典/合集/zdhj.json
           else
