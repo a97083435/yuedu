@@ -18,33 +18,20 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Set up jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+
       - name: Merge JSON files to one big array
         run: |
           mkdir -p 净化/合集
-          # 查找所有json文件，排除jh.json，然后合并为一个大数组
           files=$(find 净化 -type f -name '*.json' ! -path '净化/合集/jh.json')
-          echo "[" > 净化/合集/jh.json
-          first_file=1
-          for file in $files; do
-            # 跳过空文件
-            if [ ! -s "$file" ]; then
-              continue
-            fi
-            # 去掉首尾[ ]，避免嵌套
-            content=$(cat "$file" | sed -e '1d' -e '$d')
-            # 跳过空内容
-            if [ -z "$content" ]; then
-              continue
-            fi
-            if [ $first_file -eq 1 ]; then
-              echo "$content" >> 净化/合集/jh.json
-              first_file=0
-            else
-              echo "," >> 净化/合集/jh.json
-              echo "$content" >> 净化/合集/jh.json
-            fi
-          done
-          echo "]" >> 净化/合集/jh.json
+          if [ -z "$files" ]; then
+            echo "[]" > 净化/合集/jh.json
+          else
+            jq -s 'add' $files > 净化/合集/jh.json
+          fi
 
       - name: Commit and push if changed
         run: |
@@ -52,6 +39,6 @@ jobs:
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
           if ! git diff --quiet 净化/合集/jh.json; then
             git add 净化/合集/jh.json
-            git commit -m '自动合并净化目录下所有json文件到合集/jh.json'
+            git commit -m '机器人自动合并净化规则'
             git push
           fi
