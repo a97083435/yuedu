@@ -8,6 +8,7 @@
 </div>
 
 <h2>部分资源导入</h2>
+
 |订阅源名称|github链接|gitee链接|
 |:--|:-:|:-:|
 |洛娅橙|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://github.com/luoyacheng/yuedu/raw/main/订阅/洛娅橙/lyc.json)|[一键导入](https://loyc.xyz/b/cdx.html?src=legado://import/importonline?src=https://gitee.com/lyc486/yuedu2/raw/main/订阅/洛娅橙/lyc.json)|
