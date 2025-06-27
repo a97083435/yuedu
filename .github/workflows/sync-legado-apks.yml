@@ -1,0 +1,64 @@
+name: Sync Legado APKs
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # 每6小时检查一次
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  sync-apks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get latest release from legado
+        id: legado
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const release = await github.rest.repos.getLatestRelease({
+              owner: 'gedoor',
+              repo: 'legado'
+            });
+            core.setOutput('version', release.data.tag_name);
+            core.setOutput('assets', JSON.stringify(release.data.assets));
+            core.setOutput('published_at', release.data.published_at);
+
+      - name: Setup download directory
+        run: |
+          mkdir -p apks
+          echo '${{ steps.legado.outputs.version }}' > apks/latest_version.txt
+          echo '${{ steps.legado.outputs.published_at }}' > apks/last_update.txt
+
+      - name: Download APKs
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const https = require('https');
+            const assets = JSON.parse('${{ steps.legado.outputs.assets }}');
+            
+            for (const asset of assets) {
+              if (asset.name.endsWith('.apk')) {
+                const file = fs.createWriteStream(`apks/${asset.name}`);
+                https.get(asset.browser_download_url, function(response) {
+                  response.pipe(file);
+                });
+              }
+            }
+
+      - name: Create version info
+        run: |
+          echo "# Legado APKs" > apks/README.md
+          echo "Last updated: ${{ steps.legado.outputs.published_at }}" >> apks/README.md
+          echo "Version: ${{ steps.legado.outputs.version }}" >> apks/README.md
+          ls -l apks >> apks/README.md
+
+      - name: Commit and push if there are changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add apks/
+          git commit -m "Update Legado APKs to ${{ steps.legado.outputs.version }}" || exit 0
+          git push
