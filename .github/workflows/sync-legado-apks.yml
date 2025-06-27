@@ -31,11 +31,11 @@ jobs:
             core.setOutput('published_at', preRelease.published_at);
             core.setOutput('name', preRelease.name);
 
-      - name: Setup download directory
+      - name: Prepare download directory
         run: |
           mkdir -p apks
-          echo '${{ steps.legado.outputs.version }}' > apks/current_version.txt
-          echo '${{ steps.legado.outputs.published_at }}' > apks/last_update.txt
+          echo "${{ steps.legado.outputs.version }}" > apks/current_version.txt
+          echo "${{ steps.legado.outputs.published_at }}" > apks/last_update.txt
 
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
@@ -44,20 +44,32 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -e
           assets=$(echo '${{ steps.legado.outputs.assets }}' | jq -r '.[] | select(.name | endswith(".apk")) | .url')
           if [ -z "$assets" ]; then
             echo "No APK assets found!"
             exit 1
           fi
+
           for url in $assets; do
-            name=$(echo "$url" | awk -F'/' '{print $NF}')
+            name=$(basename "$(echo "$url")")
             echo "Downloading $name ..."
-            curl -L -H "Accept: application/octet-stream" -H "Authorization: token $GH_TOKEN" "$url" -o "apks/$name"
-            if [ ! -s "apks/$name" ]; then
-              echo "Download failed or file is empty: $name"
+            http_code=$(curl -sSL -H "Accept: application/octet-stream" -H "Authorization: token $GH_TOKEN" -w "%{http_code}" -o "apks/$name" "$url")
+            if [ "$http_code" -ne 200 ]; then
+              echo "Failed to download $name (HTTP $http_code)"
               exit 1
             fi
+            if [ ! -s "apks/$name" ]; then
+              echo "Downloaded file is empty: $name"
+              exit 1
+            fi
+            echo "Successfully downloaded $name (size: $(stat -c%s "apks/$name") bytes)"
           done
+
+      - name: List APKs for verification
+        run: |
+          echo "List of downloaded APKs:"
+          ls -lh apks/*.apk || echo "No APK files found!"
 
       - name: Create version info
         run: |
@@ -73,5 +85,6 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add apks/
-          git commit -m "Update Legado Pre-release APKs to ${{ steps.legado.outputs.version }}" || exit 0
+          git diff --cached --quiet && echo "No changes to commit." && exit 0
+          git commit -m "Update Legado Pre-release APKs to ${{ steps.legado.outputs.version }}"
           git push
