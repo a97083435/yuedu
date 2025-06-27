@@ -45,14 +45,15 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
-          assets=$(echo '${{ steps.legado.outputs.assets }}' | jq -r '.[] | select(.name | endswith(".apk")) | .url')
+          assets=$(echo '${{ steps.legado.outputs.assets }}' | jq -c '.[] | select(.name | endswith(".apk")) | {url: .url, name: .name}')
           if [ -z "$assets" ]; then
             echo "No APK assets found!"
             exit 1
           fi
 
-          for url in $assets; do
-            name=$(basename "$(echo "$url")")
+          echo "$assets" | while read -r asset; do
+            url=$(echo "$asset" | jq -r .url)
+            name=$(echo "$asset" | jq -r .name)
             echo "Downloading $name ..."
             http_code=$(curl -sSL -H "Accept: application/octet-stream" -H "Authorization: token $GH_TOKEN" -w "%{http_code}" -o "apks/$name" "$url")
             if [ "$http_code" -ne 200 ]; then
