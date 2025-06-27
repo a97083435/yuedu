@@ -1,4 +1,4 @@
-name: Sync Legado APKs
+name: Sync Legado Pre-release APKs
 
 on:
   schedule:
@@ -6,30 +6,41 @@ on:
   workflow_dispatch:  # 允许手动触发
 
 jobs:
-  sync-apks:
+  sync-prerelease-apks:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Get latest release from legado
+      - name: Get latest pre-release from legado
         id: legado
         uses: actions/github-script@v6
         with:
           script: |
-            const release = await github.rest.repos.getLatestRelease({
+            // 获取所有发行版（包括预发行版）
+            const releases = await github.rest.repos.listReleases({
               owner: 'gedoor',
               repo: 'legado'
             });
-            core.setOutput('version', release.data.tag_name);
-            core.setOutput('assets', JSON.stringify(release.data.assets));
-            core.setOutput('published_at', release.data.published_at);
+            
+            // 找到第一个预发行版
+            const preRelease = releases.data.find(release => release.prerelease);
+            
+            if (!preRelease) {
+              core.setFailed('No pre-release found');
+              return;
+            }
+            
+            core.setOutput('version', preRelease.tag_name);
+            core.setOutput('assets', JSON.stringify(preRelease.assets));
+            core.setOutput('published_at', preRelease.published_at);
+            core.setOutput('name', preRelease.name);
 
       - name: Setup download directory
         run: |
-          mkdir -p apks
-          echo '${{ steps.legado.outputs.version }}' > apks/latest_version.txt
-          echo '${{ steps.legado.outputs.published_at }}' > apks/last_update.txt
+          mkdir -p pre-release
+          echo '${{ steps.legado.outputs.version }}' > pre-release/current_version.txt
+          echo '${{ steps.legado.outputs.published_at }}' > pre-release/last_update.txt
 
       - name: Download APKs
         uses: actions/github-script@v6
@@ -39,26 +50,36 @@ jobs:
             const https = require('https');
             const assets = JSON.parse('${{ steps.legado.outputs.assets }}');
             
-            for (const asset of assets) {
+            const downloadPromises = assets.map(asset => {
               if (asset.name.endsWith('.apk')) {
-                const file = fs.createWriteStream(`apks/${asset.name}`);
-                https.get(asset.browser_download_url, function(response) {
-                  response.pipe(file);
+                return new Promise((resolve, reject) => {
+                  const file = fs.createWriteStream(`pre-release/${asset.name}`);
+                  https.get(asset.browser_download_url, function(response) {
+                    response.pipe(file);
+                    file.on('finish', () => {
+                      file.close();
+                      resolve();
+                    });
+                  }).on('error', reject);
                 });
               }
-            }
+            }).filter(Boolean);
+            
+            await Promise.all(downloadPromises);
 
       - name: Create version info
         run: |
-          echo "# Legado APKs" > apks/README.md
-          echo "Last updated: ${{ steps.legado.outputs.published_at }}" >> apks/README.md
-          echo "Version: ${{ steps.legado.outputs.version }}" >> apks/README.md
-          ls -l apks >> apks/README.md
+          echo "# Legado Pre-release APKs" > pre-release/README.md
+          echo "Last updated: ${{ steps.legado.outputs.published_at }}" >> pre-release/README.md
+          echo "Version: ${{ steps.legado.outputs.version }}" >> pre-release/README.md
+          echo "Release name: ${{ steps.legado.outputs.name }}" >> pre-release/README.md
+          echo "## Files:" >> pre-release/README.md
+          ls -l pre-release/*.apk >> pre-release/README.md
 
       - name: Commit and push if there are changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add apks/
-          git commit -m "Update Legado APKs to ${{ steps.legado.outputs.version }}" || exit 0
+          git add pre-release/
+          git commit -m "Update Legado Pre-release APKs to ${{ steps.legado.outputs.version }}" || exit 0
           git push
