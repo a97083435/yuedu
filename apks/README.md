@@ -3,6 +3,6 @@ Last updated: 2025-06-27T13:35:08Z
 Version: beta
 Release name: legado_app_3.25.062721
 ## Files:
--rw-r--r-- 1 runner docker 0 Jun 27 16:42 apks/legado_app_3.25.06262106_release.apk
--rw-r--r-- 1 runner docker 0 Jun 27 16:42 apks/legado_app_3.25.06262106_releaseA.apk
--rw-r--r-- 1 runner docker 0 Jun 27 16:42 apks/legado_app_3.25.apk
+-rw-r--r-- 1 runner docker 0 Jun 27 16:53 apks/legado_app_3.25.06262106_release.apk
+-rw-r--r-- 1 runner docker 0 Jun 27 16:53 apks/legado_app_3.25.06262106_releaseA.apk
+-rw-r--r-- 1 runner docker 0 Jun 27 16:53 apks/legado_app_3.25.apk
