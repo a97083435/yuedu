@@ -31,16 +31,41 @@ jobs:
             core.setOutput('published_at', preRelease.published_at);
             core.setOutput('name', preRelease.name);
 
+      - name: Read last synced version
+        id: last_version
+        run: |
+          if [ -f apks/current_version.txt ]; then
+            LAST_VERSION=$(cat apks/current_version.txt)
+          else
+            LAST_VERSION=""
+          fi
+          echo "Last version: $LAST_VERSION"
+          echo "last_version=$LAST_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check if need update
+        id: check_version
+        run: |
+          if [ "${{ steps.legado.outputs.name }}" != "${{ steps.last_version.outputs.last_version }}" ]; then
+            echo "should_update=true" >> $GITHUB_OUTPUT
+            echo "New version detected: ${{ steps.legado.outputs.name }}"
+          else
+            echo "should_update=false" >> $GITHUB_OUTPUT
+            echo "No new version."
+          fi
+
       - name: Prepare download directory
+        if: steps.check_version.outputs.should_update == 'true'
         run: |
           mkdir -p apks
-          echo "${{ steps.legado.outputs.version }}" > apks/current_version.txt
+          echo "${{ steps.legado.outputs.name }}" > apks/current_version.txt
           echo "${{ steps.legado.outputs.published_at }}" > apks/last_update.txt
 
       - name: Install jq
+        if: steps.check_version.outputs.should_update == 'true'
         run: sudo apt-get update && sudo apt-get install -y jq
 
       - name: Download APKs
+        if: steps.check_version.outputs.should_update == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -68,11 +93,13 @@ jobs:
           done
 
       - name: List APKs for verification
+        if: steps.check_version.outputs.should_update == 'true'
         run: |
           echo "List of downloaded APKs:"
           ls -lh apks/*.apk || echo "No APK files found!"
 
       - name: Create version info
+        if: steps.check_version.outputs.should_update == 'true'
         run: |
           echo "# Legado Pre-release APKs" > apks/README.md
           echo "Last updated: ${{ steps.legado.outputs.published_at }}" >> apks/README.md
@@ -82,6 +109,7 @@ jobs:
           ls -l apks/*.apk >> apks/README.md
 
       - name: Commit and push if there are changes
+        if: steps.check_version.outputs.should_update == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
