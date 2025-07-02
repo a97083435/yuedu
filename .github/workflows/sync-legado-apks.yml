@@ -2,7 +2,7 @@ name: Sync Legado Pre-release APKs
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # 每6小时检查一次
+    - cron: '0 */12 * * *'  # 每12小时检查一次
   workflow_dispatch:
 
 jobs:
