@@ -2,7 +2,8 @@ name: Sync Legado Pre-release APKs
 
 on:
   schedule:
-    - cron: '0 */12 * * *'  # 每12小时检查一次
+    - cron: '0 0,12 * * 1-5' # 每12小时检查一次
+    - cron: '0 0,6,12,18 * * 6,0' # 每6小时检查一次
   workflow_dispatch:
 
 jobs:
@@ -99,6 +100,7 @@ jobs:
           ls -lh apks/*.apk || echo "No APK files found!"
 
       - name: Create version info
+        if: steps.check_version.outputs.should_update == 'true'
         run: |
           echo "# 提供阅读APP加速下载" > apks/README.md
           echo "更新时间: ${{ steps.legado.outputs.published_at }}  " >> apks/README.md
@@ -110,6 +112,7 @@ jobs:
           done
 
       - name: Commit and push if there are changes
+        if: steps.check_version.outputs.should_update == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
