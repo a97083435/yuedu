@@ -101,10 +101,10 @@ jobs:
       - name: Create version info
         run: |
           echo "# 提供阅读APP加速下载" > apks/README.md
-          echo "最后更新时间: ${{ steps.legado.outputs.published_at }}  " >> apks/README.md
+          echo "更新时间: ${{ steps.legado.outputs.published_at }}  " >> apks/README.md
           echo "最新版本: ${{ steps.legado.outputs.name }}" >> apks/README.md
           echo "## 下载链接:" >> apks/README.md
-          for apk in apks/*.apk; do
+          for apk in $(ls -r apks/*.apk); do
             filename=$(basename "$apk")
             echo "- [$filename](https://yd.loyc.xyz/apks/$filename)" >> apks/README.md
           done
