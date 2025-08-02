@@ -104,7 +104,6 @@ jobs:
           echo "最后更新时间: ${{ steps.legado.outputs.published_at }}  " >> apks/README.md
           echo "最新版本: ${{ steps.legado.outputs.name }}" >> apks/README.md
           echo "## 下载链接:" >> apks/README.md
-          ls -l apks/*.apk >> apks/README.md
           for apk in apks/*.apk; do
             filename=$(basename "$apk")
             echo "- [$filename](https://yd.loyc.xyz/apks/$filename)" >> apks/README.md
