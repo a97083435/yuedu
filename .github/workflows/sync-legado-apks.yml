@@ -99,14 +99,16 @@ jobs:
           ls -lh apks/*.apk || echo "No APK files found!"
 
       - name: Create version info
-        if: steps.check_version.outputs.should_update == 'true'
         run: |
-          echo "# Legado Pre-release APKs" > apks/README.md
-          echo "Last updated: ${{ steps.legado.outputs.published_at }}" >> apks/README.md
-          echo "Version: ${{ steps.legado.outputs.version }}" >> apks/README.md
-          echo "Release name: ${{ steps.legado.outputs.name }}" >> apks/README.md
-          echo "## Files:" >> apks/README.md
+          echo "# 提供阅读APP加速下载" > apks/README.md
+          echo "最后更新时间: ${{ steps.legado.outputs.published_at }}  " >> apks/README.md
+          echo "最新版本: ${{ steps.legado.outputs.name }}" >> apks/README.md
+          echo "## 下载链接:" >> apks/README.md
           ls -l apks/*.apk >> apks/README.md
+          for apk in apks/*.apk; do
+            filename=$(basename "$apk")
+            echo "- [$filename](https://yd.loyc.xyz/apks/$filename)" >> apks/README.md
+          done
 
       - name: Commit and push if there are changes
         if: steps.check_version.outputs.should_update == 'true'
